@@ -26,19 +26,19 @@
             </div>
             <div class="w-row">
                 <div class="w-col w-col-4">
-                    <div data-w-id="Logo_Nachhaltigkeit.jpg" styles="opacity:0" class="white-box">
+                    <div data-w-id="Logo_Nachhaltigkeit.jpg" style="opacity:0" class="white-box">
                         <h3>Awesome code</h3>
                         <p>1 Beschreibung Artikel</p>
                     </div>
                 </div>
                 <div class="w-col w-col-4">
-                    <div data-w-id="Logo_Nachhaltigkeit.jpg" styles="opacity:0" class="white-box">
+                    <div data-w-id="Logo_Nachhaltigkeit.jpg" style="opacity:0" class="white-box">
                         <h3>Awesome code</h3>
                         <p>2 Beschreibung Artikel</p>
                     </div>
                 </div>
                 <div class="w-col w-col-4">
-                    <div data-w-id="Logo_Nachhaltigkeit.jpg" styles="opacity:0" class="white-box">
+                    <div data-w-id="Logo_Nachhaltigkeit.jpg" style="opacity:0" class="white-box">
                         <h3>Awesome code</h3>
                         <p>3 Beschreibung Artikel</p>
                     </div>

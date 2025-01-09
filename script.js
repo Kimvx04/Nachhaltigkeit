@@ -8,14 +8,16 @@ document.addEventListener("DOMContentLoaded", () => {
     let totalPages = Math.ceil(products.length / itemsPerPage);
     let currentPage = 1;
 
-    // Aktualisiert die Seitennavigation
     const updatePagination = () => {
         const pageNumbers = Array.from(
             paginationContainer.querySelectorAll(".page-number")
         );
 
+        // Verberge die dritte Seite, wenn Desktop
         pageNumbers.forEach((pageNumber, index) => {
             const pageIndex = index + 1;
+            pageNumber.style.display = window.innerWidth > 768 && pageIndex === 3 ? "none" : "inline-block";
+
             if (pageIndex === currentPage) {
                 pageNumber.classList.add("active");
             } else {
@@ -24,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
-    // Zeigt die aktuelle Seite
     const showPage = (pageNumber) => {
         const start = (pageNumber - 1) * itemsPerPage;
         const end = start + itemsPerPage;
@@ -37,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
         updatePagination();
     };
 
-    // Eventlistener für Seitennavigation
     const handlePaginationClick = (e) => {
         if (e.target.classList.contains("page-number")) {
             const pageNumber = parseInt(e.target.dataset.page, 10);
@@ -49,10 +49,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // Passt die Artikelanzahl bei Größenänderung an
     const handleResize = () => {
         itemsPerPage = window.innerWidth <= 768 ? 2 : 3;
         totalPages = Math.ceil(products.length / itemsPerPage);
+
+        // Passe die aktuelle Seite an die maximale Seitengröße an
         currentPage = Math.min(currentPage, totalPages);
         showPage(currentPage);
     };

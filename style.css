@@ -320,12 +320,6 @@ body {
     background-color: #333;
     color: white;
 }
-/* Responsive Anpassungen */
-@media (max-width: 1024px) {
-    .product {
-        flex: 1 1 calc(50% - 40px); /* Zwei Artikel pro Zeile */
-    }
-}
 
 /* Responsive Anpassungen */
 @media (max-width: 768px) {

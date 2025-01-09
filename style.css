@@ -261,12 +261,10 @@ body {
     justify-content: center;
     gap: 20px;
     overflow: hidden; /* Verhindert Anzeige versteckter Elemente */
-    height: 300px; /* Höhe für drei Produkte */
 }
 
 .product {
-    display: none; /* Standardmäßig nicht sichtbar */
-    flex: 1 1 calc(33.33% - 40px); /* Drei Artikel pro Zeile */
+    flex: 1 1 calc(33.33% - 40px); /* Standard: Drei Artikel pro Zeile */
     max-width: 300px;
     text-align: center;
     padding: 10px;
@@ -274,16 +272,15 @@ body {
     border-radius: 5px;
     background-color: #fff;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 100%; /* Gleiche Höhe für alle Produkte */
-    display: flex; /* Flexbox für strukturierte Inhalte */
-    flex-direction: column; /* Stellt sicher, dass die Inhalte untereinander gestapelt werden */
-    justify-content: space-between; /* Verteilt den Platz gleichmäßig */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 
 .product img {
     width: 100%; /* Bild passt in die Box */
-    height: 200px; /* Einheitliche Höhe für alle Bilder */
+    height: auto; /* Proportionales Skalieren */
     object-fit: cover; /* Bild wird proportional angepasst */
     margin-bottom: 10px;
     border-radius: 5px;
@@ -323,6 +320,18 @@ body {
 .pagination .active {
     background-color: #333;
     color: white;
+}
+/* Responsive Anpassungen */
+@media (max-width: 1024px) {
+    .product {
+        flex: 1 1 calc(50% - 40px); /* Zwei Artikel pro Zeile */
+    }
+}
+
+@media (max-width: 768px) {
+    .product {
+        flex: 1 1 calc(100% - 40px); /* Ein Artikel pro Zeile */
+    }
 }
 
 

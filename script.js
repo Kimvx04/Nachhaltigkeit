@@ -4,28 +4,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const prevButton = document.querySelector(".prev");
     const nextButton = document.querySelector(".next");
 
-    let itemsPerPage = window.innerWidth <= 768 ? 2 : 3; // Dynamische Artikelanzahl
+    let itemsPerPage = window.innerWidth <= 768 ? 2 : 3; // 2 Artikel pro Seite im Handyformat, 3 Artikel im großen Format
     let totalPages = Math.ceil(products.length / itemsPerPage);
     let currentPage = 1;
 
+    // Funktion zur Aktualisierung der Paginierungsbuttons
     const updatePagination = () => {
         const pageNumbers = Array.from(
             paginationContainer.querySelectorAll(".page-number")
         );
 
-        // Verberge die dritte Seite, wenn Desktop
+        // Aktualisiere aktive Seite und verstecke dritte Seite im großen Format
         pageNumbers.forEach((pageNumber, index) => {
             const pageIndex = index + 1;
-            pageNumber.style.display = window.innerWidth > 768 && pageIndex === 3 ? "none" : "inline-block";
+            pageNumber.style.display =
+                window.innerWidth > 768 && pageIndex > 2 ? "none" : "inline-block";
 
-            if (pageIndex === currentPage) {
-                pageNumber.classList.add("active");
-            } else {
-                pageNumber.classList.remove("active");
-            }
+            pageNumber.classList.toggle("active", pageIndex === currentPage);
         });
     };
 
+    // Funktion zur Anzeige der Artikel
     const showPage = (pageNumber) => {
         const start = (pageNumber - 1) * itemsPerPage;
         const end = start + itemsPerPage;
@@ -38,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         updatePagination();
     };
 
+    // Navigation bei Button-Klick
     const handlePaginationClick = (e) => {
         if (e.target.classList.contains("page-number")) {
             const pageNumber = parseInt(e.target.dataset.page, 10);
@@ -49,12 +49,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+    // Dynamische Anpassung der Seiteneinstellungen bei Bildschirmgröße
     const handleResize = () => {
         itemsPerPage = window.innerWidth <= 768 ? 2 : 3;
         totalPages = Math.ceil(products.length / itemsPerPage);
 
-        // Passe die aktuelle Seite an die maximale Seitengröße an
-        currentPage = Math.min(currentPage, totalPages);
+        currentPage = Math.min(currentPage, totalPages); // Stelle sicher, dass die Seite gültig bleibt
         showPage(currentPage);
     };
 
@@ -64,6 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initialisierung
     showPage(1);
 });
+
 
 
 

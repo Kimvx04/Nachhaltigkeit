@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
          // Klick außerhalb des Menüs schließt das Dropdown-Menü
-    document.addEventListener('click', (event) => {
+    dropdownMenu.addEventListener('click', (event) => {
         if (!burgerMenu.contains(event.target) && !dropdownMenu.contains(event.target)) {
             dropdownMenu.classList.remove('active'); // Schließe das Menü, wenn außerhalb geklickt wird
         }

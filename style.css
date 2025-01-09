@@ -139,17 +139,19 @@ body {
     position: relative;
     z-index: 10;
 }
-/* Warenkorb-Button auf kleineren Bildschirmen */
+
+/* Float-Warenkorb für kleinere Bildschirme */
 .cart-float {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 20px; /* Abstand vom unteren Bildschirmrand */
+    right: 20px; /* Abstand vom rechten Bildschirmrand */
     background-color: #ffffff;
     border-radius: 50%;
     padding: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    display: none; /* Anfangszustand */
+    display: none; /* Anfangszustand: Versteckt */
+    cursor: pointer;
 }
 
 .cart-float img {

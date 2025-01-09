@@ -72,8 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const burgerMenu = document.querySelector('.burger-menu');
         const dropdownMenu = document.querySelector('.dropdown-menu');
         const navLeft = document.querySelector('.nav-left');
-        const cartLink = document.querySelector('.cart');
-        const floatButton = document.createElement('a');
 
         console.log("JavaScript geladen");
     
@@ -88,30 +86,43 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!burgerMenu.contains(event.target) && !dropdownMenu.contains(event.target)) {
             dropdownMenu.classList.remove('active'); // Schließe das Menü, wenn außerhalb geklickt wird
         }
-    });
+    }); 
+    }
     
-        // Float-Button erstellen
-        const floatButton = document.createElement('a');
+    document.addEventListener('DOMContentLoaded', function () {
+        const cartLink = document.querySelector('.cart'); // Navigations-Warenkorb
+        const floatButton = document.createElement('a'); // Erstelle Float-Warenkorb
+    
+        // Float-Button konfigurieren
         floatButton.href = "cart.html";
         floatButton.classList.add('cart-float');
         floatButton.innerHTML = `<img src="in-den-warenkorb-legen.png" alt="Warenkorb">`;
-
-        // 3. Warenkorb-Logik für Handyformat
-    function handleResize() {
-        if (window.innerWidth <= 768) {
-            // Handyformat: Float-Warenkorb anzeigen, Nav-Warenkorb verstecken
-            if (!document.body.contains(floatButton)) {
-                document.body.appendChild(floatButton);
+    
+        // Funktion zur Handhabung der Bildschirmgröße
+        function handleResize() {
+            if (window.innerWidth <= 768) {
+                // Handyformat: Float-Warenkorb anzeigen, Nav-Warenkorb verstecken
+                if (!document.body.contains(floatButton)) {
+                    document.body.appendChild(floatButton); // Float-Button zum DOM hinzufügen
+                }
+                if (cartLink) cartLink.style.display = 'none'; // Navigations-Warenkorb ausblenden
+            } else {
+                // Desktopformat: Float-Warenkorb entfernen, Nav-Warenkorb anzeigen
+                if (document.body.contains(floatButton)) {
+                    document.body.removeChild(floatButton); // Float-Button entfernen
+                }
+                if (cartLink) cartLink.style.display = 'inline-block'; // Navigations-Warenkorb anzeigen
             }
-            if (cartLink) cartLink.style.display = 'none';
-        } else {
-            // Desktopformat: Float-Warenkorb entfernen, Nav-Warenkorb anzeigen
-            if (document.body.contains(floatButton)) {
-                document.body.removeChild(floatButton);
-            }
-            if (cartLink) cartLink.style.display = 'inline-block';
         }
-    }
+    
+        // Initiale Prüfung bei Seitenladen
+        handleResize();
+    
+        // Event Listener für Fenstergröße
+        window.addEventListener('resize', handleResize);
+    });
+    
+    
 
     // 4. Initiale Prüfung + Fenstergrößenänderung
     handleResize();

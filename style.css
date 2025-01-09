@@ -138,10 +138,6 @@ body {
         display: block;
     }
 
-    .dropdown-menu {
-        display: none; /* Standardmäßig versteckt */
-    }
-
     .dropdown-menu.active {
         display: flex; /* Wird sichtbar, wenn Klasse hinzugefügt */
     }

@@ -81,6 +81,13 @@ document.addEventListener("DOMContentLoaded", () => {
         burgerMenu.addEventListener('click', () => {
             dropdownMenu.classList.toggle('active'); // CSS-Klasse steuert die Sichtbarkeit
         });
+
+         // Klick außerhalb des Menüs schließt das Dropdown-Menü
+    document.addEventListener('click', (event) => {
+        if (!burgerMenu.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.classList.remove('active'); // Schließe das Menü, wenn außerhalb geklickt wird
+        }
+    });
     
         // Float-Button erstellen
         const floatButton = document.createElement('a');

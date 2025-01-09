@@ -4,70 +4,66 @@ document.addEventListener("DOMContentLoaded", () => {
     const prevButton = document.querySelector(".prev");
     const nextButton = document.querySelector(".next");
 
-    let itemsPerPage = window.innerWidth <= 768 ? 2 : 3; // Dynamische Artikelanzahl pro Seite
+    let itemsPerPage = window.innerWidth <= 768 ? 2 : 3; // Dynamische Artikelanzahl
     let totalPages = Math.ceil(products.length / itemsPerPage);
     let currentPage = 1;
 
-    const updatePaginationButtons = () => {
-        const newButtons = [];
-        for (let i = 1; i <= totalPages; i++) {
-            newButtons.push(
-                `<span class="page-number ${
-                    i === currentPage ? "active" : ""
-                }" data-page="${i}">${i}</span>`
-            );
-        }
-        paginationContainer.innerHTML = `
-            <span class="prev">&#10094;</span>
-            ${newButtons.join("")}
-            <span class="next">&#10095;</span>
-        `;
-    };
+    // Aktualisiert die Seitennavigation
+    const updatePagination = () => {
+        const pageNumbers = Array.from(
+            paginationContainer.querySelectorAll(".page-number")
+        );
 
-    const showPage = (pageNumber) => {
-        const startIndex = (pageNumber - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-
-        // Zeige nur die Produkte der aktuellen Seite
-        products.forEach((product, index) => {
-            product.style.display = index >= startIndex && index < endIndex ? "block" : "none";
-        });
-
-        currentPage = pageNumber;
-        updatePaginationButtons();
-    };
-
-    const updateItemsPerPage = () => {
-        itemsPerPage = window.innerWidth <= 768 ? 2 : 3; // Dynamische Artikelanzahl pro Seite
-        totalPages = Math.ceil(products.length / itemsPerPage);
-        currentPage = Math.min(currentPage, totalPages); // Sicherstellen, dass die Seite gültig ist
-        updatePaginationButtons();
-        showPage(currentPage);
-    };
-
-    const addPaginationEventListeners = () => {
-        paginationContainer.addEventListener("click", (e) => {
-            if (e.target.classList.contains("page-number")) {
-                const pageNumber = parseInt(e.target.getAttribute("data-page"), 10);
-                showPage(pageNumber);
-            } else if (e.target.classList.contains("prev")) {
-                if (currentPage > 1) {
-                    showPage(currentPage - 1);
-                }
-            } else if (e.target.classList.contains("next")) {
-                if (currentPage < totalPages) {
-                    showPage(currentPage + 1);
-                }
+        pageNumbers.forEach((pageNumber, index) => {
+            const pageIndex = index + 1;
+            if (pageIndex === currentPage) {
+                pageNumber.classList.add("active");
+            } else {
+                pageNumber.classList.remove("active");
             }
         });
     };
 
+    // Zeigt die aktuelle Seite
+    const showPage = (pageNumber) => {
+        const start = (pageNumber - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+
+        products.forEach((product, index) => {
+            product.style.display = index >= start && index < end ? "block" : "none";
+        });
+
+        currentPage = pageNumber;
+        updatePagination();
+    };
+
+    // Eventlistener für Seitennavigation
+    const handlePaginationClick = (e) => {
+        if (e.target.classList.contains("page-number")) {
+            const pageNumber = parseInt(e.target.dataset.page, 10);
+            showPage(pageNumber);
+        } else if (e.target.classList.contains("prev")) {
+            if (currentPage > 1) showPage(currentPage - 1);
+        } else if (e.target.classList.contains("next")) {
+            if (currentPage < totalPages) showPage(currentPage + 1);
+        }
+    };
+
+    // Passt die Artikelanzahl bei Größenänderung an
+    const handleResize = () => {
+        itemsPerPage = window.innerWidth <= 768 ? 2 : 3;
+        totalPages = Math.ceil(products.length / itemsPerPage);
+        currentPage = Math.min(currentPage, totalPages);
+        showPage(currentPage);
+    };
+
+    paginationContainer.addEventListener("click", handlePaginationClick);
+    window.addEventListener("resize", handleResize);
+
     // Initialisierung
-    window.addEventListener("resize", updateItemsPerPage);
-    updateItemsPerPage();
-    addPaginationEventListeners();
-    showPage(currentPage);
+    showPage(1);
 });
+
 
 
     document.addEventListener('DOMContentLoaded', function () {

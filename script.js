@@ -4,10 +4,29 @@ document.addEventListener("DOMContentLoaded", () => {
     const prevButton = document.querySelector(".prev");
     const nextButton = document.querySelector(".next");
 
-    let itemsPerPage = window.innerWidth <= 768 ? 2 : 3; // 2 Artikel pro Seite bei Handys
+    let itemsPerPage = window.innerWidth <= 768 ? 2 : 3; // Dynamisch anpassen
+    let totalPages = Math.ceil(products.length / itemsPerPage);
     let currentPage = 1;
 
+    const updatePaginationButtons = () => {
+        const paginationContainer = document.querySelector(".pagination");
+        const newButtons = [];
+        for (let i = 1; i <= totalPages; i++) {
+            newButtons.push(
+                `<span class="page-number ${
+                    i === currentPage ? "active" : ""
+                }" data-page="${i}">${i}</span>`
+            );
+        }
+        paginationContainer.innerHTML = `
+            <span class="prev">&#10094;</span>
+            ${newButtons.join("")}
+            <span class="next">&#10095;</span>
+        `;
+    };
+
     const updatePagination = () => {
+        const paginationButtons = document.querySelectorAll(".page-number");
         paginationButtons.forEach((button) => {
             const page = parseInt(button.getAttribute("data-page"), 10);
             button.classList.toggle("active", page === currentPage);
@@ -29,38 +48,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const updateItemsPerPage = () => {
         itemsPerPage = window.innerWidth <= 768 ? 2 : 3; // Dynamisch an Bildschirmgröße anpassen
+        totalPages = Math.ceil(products.length / itemsPerPage);
+        currentPage = Math.min(currentPage, totalPages); // Sicherstellen, dass die Seite gültig ist
+        updatePaginationButtons();
         showPage(currentPage);
     };
 
-    paginationButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-            const pageNumber = parseInt(button.getAttribute("data-page"), 10);
-            showPage(pageNumber);
+    const addPaginationEventListeners = () => {
+        document.querySelector(".pagination").addEventListener("click", (e) => {
+            if (e.target.classList.contains("page-number")) {
+                const pageNumber = parseInt(e.target.getAttribute("data-page"), 10);
+                showPage(pageNumber);
+            } else if (e.target.classList.contains("prev")) {
+                if (currentPage > 1) {
+                    showPage(currentPage - 1);
+                }
+            } else if (e.target.classList.contains("next")) {
+                if (currentPage < totalPages) {
+                    showPage(currentPage + 1);
+                }
+            }
         });
-    });
+    };
 
-    prevButton.addEventListener("click", () => {
-        if (currentPage > 1) {
-            showPage(currentPage - 1);
-        }
-    });
-
-    nextButton.addEventListener("click", () => {
-        if (currentPage < Math.ceil(products.length / itemsPerPage)) {
-            showPage(currentPage + 1);
-        }
-    });
-
-    window.addEventListener("resize", updateItemsPerPage); // Neu berechnen bei Bildschirmgröße
-    showPage(1);
+    // Initialisieren
+    window.addEventListener("resize", updateItemsPerPage);
+    updatePaginationButtons();
+    addPaginationEventListeners();
+    showPage(currentPage);
 });
-
-    // Initiale Anzeige der ersten Seite
-    showPage(1);
-});
-
-
-    
 
 
     document.addEventListener('DOMContentLoaded', function () {

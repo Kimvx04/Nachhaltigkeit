@@ -328,16 +328,11 @@ body {
     }
 }
 
+/* Responsive Anpassungen */
 @media (max-width: 768px) {
-    .product-list {
-        height: auto; /* Höhe automatisch an den Inhalt anpassen */
-    }
     .product {
         flex: 1 1 calc(50% - 20px); /* Zwei Artikel nebeneinander */
         max-width: calc(50% - 20px);
-    }
-    .product img {
-        height: auto; /* Bilder proportional skalieren */
     }
 }
 

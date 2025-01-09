@@ -7,6 +7,7 @@ body {
 }
 
 .hero {
+    position: relative; /* Erforderlich für die Überlagerung */
     background-image: url('Meer.jpeg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -17,12 +18,16 @@ body {
     justify-content: center; /* Zentriert den Text horizontal */
     align-items: center; /* Zentriert den Text vertikal */
     text-align: center; /* Zentriert den Text im Block */
+    overflow: hidden; /* Verhindert Überlauf */
 }
 .hero h1 {
+    position: relative;
     font-size: clamp(1.5rem, 5vw, 4rem); /* Dynamische Schriftgröße */
     margin: 0; /* Entfernt Standardabstand */
     line-height: 1.2; /* Optimiert den Abstand zwischen den Zeilen */
+    z-index: 10; /* Hält den Text über den Wellen */
 }
+
 
 
 /* Navigation */
@@ -47,7 +52,7 @@ body {
 
 .brand-name {
     font-size: 1.5em;
-    font-weight: bold;
+    font-weight: normal;
     color: #333;
 }
 
@@ -82,10 +87,11 @@ body {
     background: none;
     border: none;
     cursor: pointer;
+    z-index: 1000; /* Über anderen Elementen */
 }
 
 .dropdown-menu {
-    display: none;
+    display: none; /* Standardmäßig ausgeblendet */
     flex-direction: column;
     position: absolute;
     top: 60px;
@@ -93,8 +99,9 @@ body {
     background-color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 10px;
-    z-index: 10;
+    z-index: 1000; /* Über anderen Elementen */
 }
+
 
 .dropdown-link {
     text-decoration: none;
@@ -127,17 +134,14 @@ body {
 }
 
 @media (max-width: 768px) {
-    .nav-left {
-        display: none;
-    }
-
     .burger-menu {
-        display: block;
+        display: block; /* Im Handyformat sichtbar */
+    }
+    .nav-left {
+        display: none; /* Links ausblenden */
     }
 
-    .dropdown-menu {
-        width: 200px;
-    }
+    
 }
 
 /* Float Button für den Warenkorb */
@@ -255,15 +259,12 @@ body {
 
 .product-list {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
     overflow: hidden; /* Verhindert Anzeige versteckter Elemente */
-    height: 300px; /* Höhe für drei Produkte */
 }
 
 .product {
-    display: none; /* Standardmäßig nicht sichtbar */
     flex: 1 1 calc(33.33% - 40px); /* Drei Artikel pro Zeile */
     max-width: 300px;
     text-align: center;

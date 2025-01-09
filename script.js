@@ -73,6 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const dropdownMenu = document.querySelector('.dropdown-menu');
         const navLeft = document.querySelector('.nav-left');
         const cartLink = document.querySelector('.cart');
+        const floatButton = document.createElement('a');
 
         console.log("JavaScript geladen");
     
@@ -87,25 +88,25 @@ document.addEventListener("DOMContentLoaded", () => {
         floatButton.classList.add('cart-float');
         floatButton.innerHTML = `<img src="in-den-warenkorb-legen.png" alt="Warenkorb">`;
 
-        // Im Handyformat hinzufügen
+        // 3. Warenkorb-Logik für Handyformat
+    function handleResize() {
         if (window.innerWidth <= 768) {
-        document.body.appendChild(floatButton);
-        if (cartLink) cartLink.style.display = 'none';
-    }
-    
-        // Aktualisieren bei Fenstergrößenänderung
-        window.addEventListener('resize', () => {
-            if (window.innerWidth <= 768) {
-                if (!document.body.contains(floatButton)) {
-                    document.body.appendChild(floatButton);
-                }
-                if (cartLink) cartLink.style.display = 'none';
-            } else {
-                if (document.body.contains(floatButton)) {
-                    document.body.removeChild(floatButton);
-                }
-                if (cartLink) cartLink.style.display = 'inline';
+            // Handyformat: Float-Warenkorb anzeigen, Nav-Warenkorb verstecken
+            if (!document.body.contains(floatButton)) {
+                document.body.appendChild(floatButton);
             }
-        });
+            if (cartLink) cartLink.style.display = 'none';
+        } else {
+            // Desktopformat: Float-Warenkorb entfernen, Nav-Warenkorb anzeigen
+            if (document.body.contains(floatButton)) {
+                document.body.removeChild(floatButton);
+            }
+            if (cartLink) cartLink.style.display = 'inline-block';
+        }
+    }
+
+    // 4. Initiale Prüfung + Fenstergrößenänderung
+    handleResize();
+    window.addEventListener('resize', handleResize);
 });
     

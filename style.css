@@ -46,13 +46,11 @@ body {
 }
 
 .brand-name {
-<<<<<<< HEAD
     font-size: 1.6em;
     font-weight: normal;
 =======
     font-size: 1.5em;
     font-weight: bold;
->>>>>>> parent of 5d26ef1 (git push origin main)
     color: #333;
 }
 

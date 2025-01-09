@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const paginationButtons = document.querySelectorAll(".page-number");
     const prevButton = document.querySelector(".prev");
     const nextButton = document.querySelector(".next");
-    const itemsPerPage = 3; // Immer 3 Artikel pro Seite
+    const itemsPerPage = 3;
     let currentPage = 1;
 
     const updatePagination = () => {
@@ -50,6 +50,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+    
+
+
     document.addEventListener('DOMContentLoaded', function () {
         const burgerMenu = document.querySelector('.burger-menu');
         const dropdownMenu = document.querySelector('.dropdown-menu');
@@ -57,17 +60,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const cartLink = document.querySelector('.cart');
 
         console.log("JavaScript geladen");
-        console.log('Burger-Menü angeklickt'); 
-        console.log(dropdownMenu); // Prüft, ob das Element vorhanden ist
-
     
         // Toggle Burger-Menü
         burgerMenu.addEventListener('click', () => {
-            if (dropdownMenu.style.display === 'flex') {
-                dropdownMenu.style.display = 'none';
-            } else {
-                dropdownMenu.style.display = 'flex';
-            }
+            dropdownMenu.style.display =
+                dropdownMenu.style.display === 'flex' ? 'none' : 'flex';
         });
     
         // Float-Button erstellen

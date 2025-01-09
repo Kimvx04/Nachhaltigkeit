@@ -1,15 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
     const products = Array.from(document.querySelectorAll(".product"));
-    const paginationButtons = document.querySelectorAll(".page-number");
+    const paginationContainer = document.querySelector(".pagination");
     const prevButton = document.querySelector(".prev");
     const nextButton = document.querySelector(".next");
 
-    let itemsPerPage = window.innerWidth <= 768 ? 2 : 3; // Dynamisch anpassen
+    let itemsPerPage = window.innerWidth <= 768 ? 2 : 3; // Dynamische Artikelanzahl pro Seite
     let totalPages = Math.ceil(products.length / itemsPerPage);
     let currentPage = 1;
 
     const updatePaginationButtons = () => {
-        const paginationContainer = document.querySelector(".pagination");
         const newButtons = [];
         for (let i = 1; i <= totalPages; i++) {
             newButtons.push(
@@ -25,14 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
     };
 
-    const updatePagination = () => {
-        const paginationButtons = document.querySelectorAll(".page-number");
-        paginationButtons.forEach((button) => {
-            const page = parseInt(button.getAttribute("data-page"), 10);
-            button.classList.toggle("active", page === currentPage);
-        });
-    };
-
     const showPage = (pageNumber) => {
         const startIndex = (pageNumber - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
@@ -43,11 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         currentPage = pageNumber;
-        updatePagination();
+        updatePaginationButtons();
     };
 
     const updateItemsPerPage = () => {
-        itemsPerPage = window.innerWidth <= 768 ? 2 : 3; // Dynamisch an Bildschirmgröße anpassen
+        itemsPerPage = window.innerWidth <= 768 ? 2 : 3; // Dynamische Artikelanzahl pro Seite
         totalPages = Math.ceil(products.length / itemsPerPage);
         currentPage = Math.min(currentPage, totalPages); // Sicherstellen, dass die Seite gültig ist
         updatePaginationButtons();
@@ -55,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const addPaginationEventListeners = () => {
-        document.querySelector(".pagination").addEventListener("click", (e) => {
+        paginationContainer.addEventListener("click", (e) => {
             if (e.target.classList.contains("page-number")) {
                 const pageNumber = parseInt(e.target.getAttribute("data-page"), 10);
                 showPage(pageNumber);
@@ -71,9 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
-    // Initialisieren
+    // Initialisierung
     window.addEventListener("resize", updateItemsPerPage);
-    updatePaginationButtons();
+    updateItemsPerPage();
     addPaginationEventListeners();
     showPage(currentPage);
 });

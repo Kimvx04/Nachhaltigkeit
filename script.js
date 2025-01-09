@@ -78,8 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
         // Toggle Burger-Menü
         burgerMenu.addEventListener('click', () => {
-            dropdownMenu.style.display =
-                dropdownMenu.style.display === 'flex' ? 'none' : 'flex';
+            dropdownMenu.classList.toggle('active'); // CSS-Klasse steuert die Sichtbarkeit
         });
     
         // Float-Button erstellen
@@ -96,17 +95,17 @@ document.addEventListener("DOMContentLoaded", () => {
     
         // Aktualisieren bei Fenstergrößenänderung
         window.addEventListener('resize', () => {
-        if (window.innerWidth <= 768) {
-            if (!document.body.contains(floatButton)) {
-                document.body.appendChild(floatButton);
+            if (window.innerWidth <= 768) {
+                if (!document.body.contains(floatButton)) {
+                    document.body.appendChild(floatButton);
+                }
+                if (cartLink) cartLink.style.display = 'none';
+            } else {
+                if (document.body.contains(floatButton)) {
+                    document.body.removeChild(floatButton);
+                }
+                if (cartLink) cartLink.style.display = 'inline';
             }
-            if (cartLink) cartLink.style.display = 'none';
-        } else {
-            if (document.body.contains(floatButton)) {
-                document.body.removeChild(floatButton);
-            }
-            if (cartLink) cartLink.style.display = 'inline';
-        }
-    });
+        });
 });
     

@@ -1,0 +1,517 @@
+/* Allgemeine Stile */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.hero {
+    background-image: url('Meer.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 4vh; /* Höhe des Abschnitts, optional */
+    color: white; /* Textfarbe, um auf hellem Hintergrund lesbar zu sein */
+    display: flex;
+    justify-content: center; /* Zentriert den Text horizontal */
+    align-items: center; /* Zentriert den Text vertikal */
+    text-align: center; /* Zentriert den Text im Block */
+}
+.hero h1 {
+    font-size: clamp(1.5rem, 5vw, 4rem); /* Dynamische Schriftgröße */
+    margin: 0; /* Entfernt Standardabstand */
+    line-height: 1.2; /* Optimiert den Abstand zwischen den Zeilen */
+}
+
+
+/* Navigation */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+.logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.brand-name {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+}
+
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-link {
+    text-decoration: none;
+    font-size: 1em;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.nav-link img {
+    width: 24px;
+    height: 24px;
+}
+
+/* Hover-Effekt */
+.nav-link:hover {
+    color: gray;
+}
+
+/* Burger-Menü-Stile */
+.burger-menu {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 10;
+}
+
+.dropdown-link {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 0;
+    transition: color 0.3s ease;
+}
+
+.dropdown-link:hover {
+    color: gray;
+}
+
+/* Spezifische Stile für das Lupen-Icon im Dropdown-Menü */
+.dropdown-menu .nav-link img {
+    width: 32px; /* Neue Breite */
+    height: 32px; /* Neue Höhe */
+}
+
+/* Optional: Allgemeine Stile für alle Icons im Dropdown-Menü */
+.dropdown-menu img {
+    width: 26px;
+    height: 26px;
+}
+
+@media (max-width: 768px) {
+    .dropdown-menu .nav-link img {
+        width: 28px; /* Für kleinere Geräte */
+        height: 28px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-left {
+        display: none;
+    }
+
+    .burger-menu {
+        display: block;
+    }
+
+    .dropdown-menu {
+        width: 200px;
+    }
+}
+
+/* Float Button für den Warenkorb */
+.cart-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.cart-float img {
+    width: 24px;
+    height: 24px;
+}
+
+.cart {
+    display: none;
+}
+
+/* Hero-Bereich */
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Gender-Sektion */
+.gender-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+.gender {
+    position: relative;
+    flex: 1; /* Jede Box nimmt gleichmäßig Platz ein */
+    height: 100%; /* Volle Höhe der Sektion */
+    overflow: hidden;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-container h2 {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 2em;
+    text-align: center;
+    transition: color 0.3s ease
+}
+.gender img {
+    width: 100%;
+    border-radius: 10px;
+}
+.gender:hover {
+    transform: scale(1.05);
+}
+@media (max-width: 768px) {
+    .gender-section {
+        flex-direction: column;
+    }
+}
+
+.image-container:hover h2 {
+    color: gray; /* Ändert die Schriftfarbe beim Hover */
+}
+
+.gender a {
+    text-decoration: none; /* Entfernt Unterstreichung */
+    color: inherit; /* Beibehaltung der Schriftfarbe */
+}
+
+.gender a:hover {
+    text-decoration: none; /* Kein Textdeko beim Hover */
+}
+
+/* Bestseller */
+.bestseller {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.bestseller h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    overflow: hidden; /* Verhindert Anzeige versteckter Elemente */
+    height: 300px; /* Höhe für drei Produkte */
+}
+
+.product {
+    display: none; /* Standardmäßig nicht sichtbar */
+    flex: 1 1 calc(33.33% - 40px); /* Drei Artikel pro Zeile */
+    max-width: 300px;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    background-color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%; /* Gleiche Höhe für alle Produkte */
+    display: flex; /* Flexbox für strukturierte Inhalte */
+    flex-direction: column; /* Stellt sicher, dass die Inhalte untereinander gestapelt werden */
+    justify-content: space-between; /* Verteilt den Platz gleichmäßig */
+}
+
+
+.product img {
+    width: 100%; /* Bild passt in die Box */
+    height: 200px; /* Einheitliche Höhe für alle Bilder */
+    object-fit: cover; /* Bild wird proportional angepasst */
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.product:hover {
+    transform: scale(1.05); /* Zoom-Effekt beim Hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Schatten beim Hover */
+}
+
+.product p {
+    margin: 5px 0;
+    font-size: 1rem;
+    line-height: 1.5; /* Verbessert die Lesbarkeit */
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.pagination span {
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pagination span:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: gray;
+}
+
+.pagination .active {
+    background-color: #333;
+    color: white;
+}
+
+
+/* Warum etwas ändern */
+.why-change {
+    display: flex;
+    justify-content: center; /* Zentriert den gesamten Inhalt horizontal */
+    align-items: center; /* Zentriert den Inhalt vertikal */
+    padding: 60px 20px;
+    background-color: #f0f0f0;
+}
+
+.why-change .content {
+    display: flex;
+    flex-wrap: wrap; /* Für mobiles Layout: Elemente umbrechen */
+    gap: 30px; /* Abstand zwischen Bild und Text */
+    max-width: 1400px; /* Maximale Breite des Inhalts */
+    align-items: center;
+}
+
+.why-change img {
+    width: 100%;
+    max-width: 500px; /* Begrenzung der Bildbreite */
+    height: auto; /* Automatische Höhe für ein korrektes Seitenverhältnis */
+    border-radius: 15px; /* Abrundung der Ecken */
+    margin-right: 30px; /* Abstand zum Text auf der rechten Seite */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: leichter Schatten für visuelle Tiefe */
+    flex-shrink: 0; /* Verhindert, dass das Bild zu klein wird */
+}
+
+.why-change .text {
+    flex: 1; /* Text nimmt den verbleibenden Platz ein */
+    text-align: left;
+}
+
+.why-change .text h2 {
+    font-size: calc(2rem + 1vw); /* Schriftgröße passt sich Bildschirmbreite an */
+    margin-bottom: 25px;
+}
+
+.why-change .text p {
+    font-size: calc(1rem + 0.5vw); /* Dynamische Schriftgröße für Absatz */
+    line-height: 2.5; /* Erhöht den Zeilenabstand */
+    padding: 10px 0; /* Fügt zusätzlichen Abstand oberhalb und unterhalb hinzu */
+    margin: 0;
+}
+
+/*letzter Absatz*/
+.algae-products {
+    padding: 60px 20px; /* Mehr Abstand oben und unten */
+    margin: 30px 0; /* Fügt Abstand über und unter dem Abschnitt hinzu */
+    text-align: center; /* Zentriert den gesamten Inhalt */
+    background-color: hsl(0, 0%, 100%); /* Optional: Leichter Hintergrund */
+}
+
+.algae-products h2 {
+    font-size: calc(2rem + 1vw); /* Dynamische Schriftgröße für Überschrift */
+    margin-bottom: 30px; /* Abstand unter der Überschrift */
+    color: #333; /* Optional: Dunklere Schriftfarbe */
+}
+
+.algae-products ul {
+    list-style-type: disc; /* Punkt als Aufzählungszeichen */
+    list-style-position: inside; /* Punkte innerhalb der Box */
+    padding: 0; /* Entfernt Standard-Padding */
+    margin: 0 auto; /* Zentriert die Liste */
+    max-width: 700px; /* Begrenzte Breite für bessere Lesbarkeit */
+    text-align: left; /* Text linksbündig für die Liste */
+}
+
+.algae-products li {
+    font-size: calc(1rem + 0.6vw); /* Dynamische Schriftgröße für Listenelemente */
+    line-height: 2; /* Mehr Zeilenabstand für Lesbarkeit */
+    margin-bottom: 15px; /* Abstand zwischen den Listenpunkten */
+    color: #555; /* Optional: Dezentere Farbe */
+}
+
+/* Footer */
+footer {
+    display: flex;
+    justify-content: space-between; /* Verteilt die Inhalte gleichmäßig */
+    align-items: center; /* Zentriert die Inhalte vertikal */
+    padding: 20px 40px; /* Abstand innen */
+    background-color: #d3d3d3;
+    font-family: Arial, sans-serif; /* Einheitliche Schriftart */
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+    flex: 1; /* Gleiche Breite für alle Abschnitte */
+    text-align: center; /* Zentriert die Inhalte */
+}
+
+.footer-left {
+    text-align: left; /* Links ausgerichtet */
+}
+
+.footer-left a {
+    text-decoration: none; /* Unterstreichung entfernen */
+    margin-right: 15px; /* Abstand zwischen Links */
+    font-size: 1rem;
+    color: #000; /* Textfarbe */
+}
+
+.footer-center p {
+    font-size: 0.9rem; /* Kleinere Schriftgröße */
+    color: #666; /* Helle Schriftfarbe */
+    margin: 0;
+}
+
+.footer-right h3 {
+    margin-bottom: 10px; /* Abstand nach unten */
+    font-size: 1.2rem;
+    color: #000; /* Textfarbe */
+}
+
+.footer-right .social-links {
+    display: flex;
+    flex-direction: column; /* Icons untereinander */
+    align-items: center; /* Zentriert */
+}
+
+.footer-right .social-links a {
+    display: flex;
+    align-items: center; /* Text und Icon auf einer Linie */
+    text-decoration: none; /* Unterstreichung entfernen */
+    margin: 5px 0; /* Abstand zwischen den Links */
+    font-size: 1rem;
+    color: #000;
+}
+
+.footer-right .social-links img {
+    width: 20px; /* Größe der Icons */
+    height: 20px;
+    margin-right: 10px; /* Abstand zwischen Icon und Text */
+}
+
+footer a {
+    text-decoration: none; /* Entfernt Unterstreichung */
+    color: #000; /* Textfarbe */
+    font-size: 1rem;
+    margin-right: 15px; /* Abstand zwischen Links */
+    transition: color 0.3s ease; /* Weicher Übergang der Farbe */
+}
+
+footer a:hover {
+    color: #6b6a6a; /* Farbe beim Hover */
+}
+
+/* Social-Links Styling */
+.footer-right .social-links a {
+    display: flex;
+    align-items: center; /* Text und Icon auf einer Linie */
+    margin: 5px 0; /* Abstand zwischen den Links */
+    color: #000; /* Standardfarbe */
+    transition: color 0.3s ease; /* Weicher Übergang der Farbe */
+}
+
+.footer-right .social-links a:hover {
+    color: #555; /* Farbe beim Hover (grau) */
+}
+
+/* Social-Icons Styling */
+.footer-right .social-links img {
+    width: 20px; /* Größe der Icons */
+    height: 20px;
+    margin-right: 10px; /* Abstand zwischen Icon und Text */
+    transition: filter 0.3s ease; /* Weicher Übergang für Filter */
+}
+
+.footer-right .social-links a:hover img {
+    filter: grayscale(50%); /* Icon wird beim Hover leicht grau */
+}
+
+
+/* Warenkorb Float-Button */
+@media (max-width: 768px) {
+    .cart {
+        display: none;
+    }
+    .float-cart {
+        position: fixed;
+        bottom: 10%;
+        left: 5%;
+        background-color: black;
+        color: white;
+        padding: 10px;
+        border-radius: 50%;
+        z-index: 1000;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+}

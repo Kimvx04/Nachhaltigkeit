@@ -2,20 +2,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // Pagination
     const products = Array.from(document.querySelectorAll(".product"));
     const paginationContainer = document.querySelector(".pagination");
+    const prevButton = document.querySelector(".prev");
+    const nextButton = document.querySelector(".next");
+
     let itemsPerPage = window.innerWidth <= 768 ? 2 : 3;
+    let totalPages = Math.ceil(products.length / itemsPerPage);
     let currentPage = 1;
-
-    const showPage = (pageNumber) => {
-        const start = (pageNumber - 1) * itemsPerPage;
-        const end = start + itemsPerPage;
-
-        products.forEach((product, index) => {
-            product.style.display = index >= start && index < end ? "block" : "none";
-        });
-
-        currentPage = pageNumber;
-        updatePagination();
-    };
 
     const updatePagination = () => {
         const pageNumbers = Array.from(
@@ -29,21 +21,55 @@ document.addEventListener("DOMContentLoaded", () => {
 
             pageNumber.classList.toggle("active", pageIndex === currentPage);
         });
+
+        // Pfeile aktualisieren
+        prevButton.disabled = currentPage === 1;
+        nextButton.disabled = currentPage === totalPages;
     };
 
-    paginationContainer.addEventListener("click", (e) => {
+    const showPage = (pageNumber) => {
+        const start = (pageNumber - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+
+        products.forEach((product, index) => {
+            product.style.display = index >= start && index < end ? "block" : "none";
+        });
+
+        currentPage = pageNumber;
+        updatePagination();
+    };
+
+    // Event Listener für Pagination
+    const handlePaginationClick = (e) => {
         if (e.target.classList.contains("page-number")) {
             const pageNumber = parseInt(e.target.dataset.page, 10);
             showPage(pageNumber);
+        } else if (e.target === prevButton) {
+            if (currentPage > 1) showPage(currentPage - 1);
+        } else if (e.target === nextButton) {
+            if (currentPage < totalPages) showPage(currentPage + 1);
         }
-    });
+    };
 
-    window.addEventListener("resize", () => {
+    // Dynamische Anpassung der Seiteneinstellungen bei Fenstergröße
+    const handleResize = () => {
         itemsPerPage = window.innerWidth <= 768 ? 2 : 3;
-        showPage(currentPage);
-    });
+        totalPages = Math.ceil(products.length / itemsPerPage);
 
+        currentPage = Math.min(currentPage, totalPages); // Stelle sicher, dass die Seite gültig bleibt
+        showPage(currentPage);
+    };
+
+    // Event Listener für Pagination und Pfeile
+    paginationContainer.addEventListener("click", handlePaginationClick);
+    prevButton.addEventListener("click", handlePaginationClick);
+    nextButton.addEventListener("click", handlePaginationClick);
+    window.addEventListener("resize", handleResize);
+
+    // Initialisierung
     showPage(1);
+});
+
 
     // Burger-Menü
     const burgerMenu = document.querySelector(".burger-menu");

@@ -99,6 +99,10 @@ body {
     z-index: 1000;
 }
 
+.dropdown-menu.active {
+    display: flex; /* Dropdown sichtbar machen */
+}
+
 .dropdown-link {
     text-decoration: none;
     color: #333;
@@ -129,18 +133,16 @@ body {
     }
 }
 
+/* Responsive Navigation */
 @media (max-width: 768px) {
     .nav-left {
-        display: none;
+        display: none; /* Verstecke die normale Navigation */
     }
 
     .burger-menu {
         display: block;
     }
-
-    .dropdown-menu.active {
-        display: flex; /* Wird sichtbar, wenn Klasse hinzugefügt */
-    }
+}
 }
 
 /* Warenkorb-Icon bleibt immer sichtbar */
@@ -277,18 +279,15 @@ body {
 }
 
 .product {
-    flex: 1 1 calc(33.33% - 20px); /* Drei Artikel nebeneinander */
+    flex: 1 1 calc(33.33% - 20px); /* Drei Produkte nebeneinander */
     max-width: calc(33.33% - 20px);
     text-align: center;
     padding: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     background-color: #fff;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
+
 
 
 .product img {

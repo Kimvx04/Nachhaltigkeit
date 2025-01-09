@@ -78,12 +78,13 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("JavaScript geladen");
     
         // Toggle Burger-Menü
-        burgerMenu.addEventListener('click', () => {
-            dropdownMenu.classList.toggle('active'); // CSS-Klasse steuert die Sichtbarkeit
+        burgerMenu.addEventListener('click', (event) => {
+            event.stopPropagation(); // Verhindert, dass der Klick das Schließen auslöst
+            dropdownMenu.classList.toggle('active');
         });
 
          // Klick außerhalb des Menüs schließt das Dropdown-Menü
-    dropdownMenu.addEventListener('click', (event) => {
+    document.addEventListener('click', (event) => {
         if (!burgerMenu.contains(event.target) && !dropdownMenu.contains(event.target)) {
             dropdownMenu.classList.remove('active'); // Schließe das Menü, wenn außerhalb geklickt wird
         }

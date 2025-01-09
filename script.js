@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }); 
     }
-    
+
     document.addEventListener('DOMContentLoaded', function () {
         const cartLink = document.querySelector('.cart'); // Navigations-Warenkorb
         const floatButton = document.createElement('a'); // Erstelle Float-Warenkorb
@@ -123,9 +123,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     
-
-    // 4. Initiale Prüfung + Fenstergrößenänderung
-    handleResize();
-    window.addEventListener('resize', handleResize);
-});
     

@@ -3,7 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const paginationButtons = document.querySelectorAll(".page-number");
     const prevButton = document.querySelector(".prev");
     const nextButton = document.querySelector(".next");
-    const itemsPerPage = 3;
+
+    let itemsPerPage = window.innerWidth <= 768 ? 2 : 3; // 2 Artikel pro Seite bei Handys
     let currentPage = 1;
 
     const updatePagination = () => {
@@ -26,6 +27,11 @@ document.addEventListener("DOMContentLoaded", () => {
         updatePagination();
     };
 
+    const updateItemsPerPage = () => {
+        itemsPerPage = window.innerWidth <= 768 ? 2 : 3; // Dynamisch an Bildschirmgröße anpassen
+        showPage(currentPage);
+    };
+
     paginationButtons.forEach((button) => {
         button.addEventListener("click", () => {
             const pageNumber = parseInt(button.getAttribute("data-page"), 10);
@@ -44,6 +50,10 @@ document.addEventListener("DOMContentLoaded", () => {
             showPage(currentPage + 1);
         }
     });
+
+    window.addEventListener("resize", updateItemsPerPage); // Neu berechnen bei Bildschirmgröße
+    showPage(1);
+});
 
     // Initiale Anzeige der ersten Seite
     showPage(1);

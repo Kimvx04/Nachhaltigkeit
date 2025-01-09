@@ -329,8 +329,15 @@ body {
 }
 
 @media (max-width: 768px) {
+    .product-list {
+        height: auto; /* Höhe automatisch an den Inhalt anpassen */
+    }
     .product {
-        flex: 1 1 calc(100% - 40px); /* Ein Artikel pro Zeile */
+        flex: 1 1 100%; /* Volle Breite einnehmen */
+        max-width: calc(50% - 20px); /* Zwei Produkte nebeneinander */
+    }
+    .product img {
+        height: auto; /* Bilder proportional skalieren */
     }
 }
 

@@ -114,8 +114,8 @@ body {
 
 /* Spezifische Stile für das Lupen-Icon im Dropdown-Menü */
 .dropdown-menu .nav-link img {
-    width: 20px; /* Neue Breite */
-    height: 20px; /* Neue Höhe */
+    width: 16px; /* Verkleinerte Breite */
+    height: 16px; /* Verkleinerte Höhe */
 }
 
 

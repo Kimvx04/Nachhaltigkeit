@@ -338,16 +338,6 @@ body {
     cursor: not-allowed;
 }
 
-/* Pfeile optisch ansprechend */
-.pagination .prev::before {
-    content: '⬅'; /* Pfeil nach links */
-    font-size: 1.2rem;
-}
-
-.pagination .next::after {
-    content: '➡'; /* Pfeil nach rechts */
-    font-size: 1.2rem;
-}
 
 /* Responsive Anpassungen */
 @media (max-width: 768px) {

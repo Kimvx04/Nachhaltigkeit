@@ -1,14 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
     const products = Array.from(document.querySelectorAll('.product'));
-    const itemsPerPageDesktop = 3; // Anzahl der Artikel pro Seite (Vollbild)
-    const itemsPerPageMobile = 2; // Anzahl der Artikel pro Seite (Handy)
     let currentPage = 1;
 
-    // Responsive Prüfung
+    // Konfigurationswerte
+    const itemsPerPageDesktop = 3; // Desktop: 3 Artikel pro Seite
+    const itemsPerPageMobile = 2; // Mobile: 2 Artikel pro Seite
+
+    // Funktion zur dynamischen Bestimmung der Artikel pro Seite
     const updateItemsPerPage = () => {
         return window.innerWidth <= 768 ? itemsPerPageMobile : itemsPerPageDesktop;
     };
 
+    // Produkte auf der aktuellen Seite anzeigen
     const renderProducts = () => {
         const itemsPerPage = updateItemsPerPage();
         const totalPages = Math.ceil(products.length / itemsPerPage);
@@ -19,17 +22,16 @@ document.addEventListener('DOMContentLoaded', () => {
             product.style.display = index >= startIndex && index < endIndex ? 'block' : 'none';
         });
 
-        // Buttons aktualisieren
+        // Navigation aktualisieren
         document.querySelector('.prev').disabled = currentPage === 1;
         document.querySelector('.next').disabled = currentPage === totalPages;
 
-        // Aktive Seite markieren
         document.querySelectorAll('.page-number').forEach((btn, idx) => {
             btn.classList.toggle('active', idx + 1 === currentPage);
         });
     };
 
-    // Pagination-Buttons erstellen
+    // Seitenzahlen und Navigation erstellen
     const createPagination = () => {
         const paginationContainer = document.querySelector('.pagination');
         const itemsPerPage = updateItemsPerPage();
@@ -43,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <button class="next">&gt;</button>
         `;
 
-        // Event Listener
+        // Navigation-Events
         paginationContainer.addEventListener('click', (event) => {
             if (event.target.matches('.prev')) {
                 currentPage = Math.max(currentPage - 1, 1);
@@ -58,12 +60,13 @@ document.addEventListener('DOMContentLoaded', () => {
         renderProducts();
     };
 
-    // Initialisieren
+    // Initialisierung
     createPagination();
 
-    // Bei Fenstergröße ändern
+    // Dynamische Aktualisierung bei Größenänderung
     window.addEventListener('resize', createPagination);
 });
+
 
 
     // Burger menu for mobile

@@ -247,6 +247,7 @@ body {
 }
 
 /* Bestseller */
+/* Bestseller */
 .bestseller {
     width: 100%;
     padding: 20px;
@@ -267,7 +268,7 @@ body {
 }
 
 .product {
-    flex: 1 1 calc(33.33% - 20px); /* Drei Produkte nebeneinander */
+    flex: 1 1 calc(33.33% - 20px); /* Drei Produkte nebeneinander im großen Format */
     max-width: calc(33.33% - 20px);
     text-align: center;
     padding: 10px;
@@ -275,8 +276,6 @@ body {
     border-radius: 5px;
     background-color: #fff;
 }
-
-
 
 .product img {
     width: 100%; /* Bild passt in die Box */
@@ -325,10 +324,11 @@ body {
 /* Responsive Anpassungen */
 @media (max-width: 768px) {
     .product {
-        flex: 1 1 calc(50% - 20px); /* Zwei Artikel nebeneinander */
+        flex: 1 1 calc(50% - 20px); /* Zwei Artikel nebeneinander im Handyformat */
         max-width: calc(50% - 20px);
     }
 }
+
 
 
 /* Warum etwas ändern */

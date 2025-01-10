@@ -37,6 +37,8 @@ body {
     padding: 10px 20px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative; /* Für Dropdown-Positionierung */
+    z-index: 100;
 }
 
 .nav-right {
@@ -81,7 +83,7 @@ body {
     background: none;
     border: none;
     cursor: pointer;
-    z-index: 1001; /* Überlagert andere Elemente */
+    z-index: 101; /* Überlagert Dropdown */
 }
 
 .dropdown-menu {
@@ -93,7 +95,8 @@ body {
     background-color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 10px;
-    z-index: 1000;
+    border-radius: 5px;
+    z-index: 100; /* Liegt über der Navigation */
 }
 
 .dropdown-menu.active {
@@ -157,6 +160,11 @@ body {
     height: 24px;
 }
 
+.cart-float:hover {
+    transform: scale(1.1); /* Leichter Vergrößerungseffekt */
+    background-color: #f0f0f0; /* Heller Hintergrund beim Hover */
+}
+
 @media (max-width: 768px) {
     .cart-float {
         bottom: 15px; /* Etwas höher auf kleinen Bildschirmen */
@@ -176,6 +184,15 @@ body {
     color: white;
     font-size: 2rem;
     font-weight: bold;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('Meer.jpeg');
+}
+
+/* Verbesserte Lesbarkeit des Hero-Textes */
+.hero h1 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    margin: 0;
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 /* Gender-Sektion */
@@ -185,24 +202,30 @@ body {
     align-items: center;
     gap: 20px;
     padding: 20px;
+    flex-wrap: wrap; /* Verhindert Überlauf bei kleinen Bildschirmgrößen */
 }
+
 .gender {
     position: relative;
     flex: 1; /* Jede Box nimmt gleichmäßig Platz ein */
     height: 100%; /* Volle Höhe der Sektion */
     overflow: hidden;
+    border-radius: 10px; /* Einheitlicher Radius für die gesamte Box */
+    transition: transform 0.3s ease; /* Glatter Übergang beim Hover */
 }
 
 .image-container {
     position: relative;
     width: 100%;
     height: 100%;
+    overflow: hidden; /* Verhindert, dass Inhalte über den Rahmen hinausgehen */
 }
 
 .image-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease; /* Weiches Zoomen beim Hover */
 }
 
 .image-container h2 {
@@ -224,11 +247,6 @@ body {
 .gender:hover {
     transform: scale(1.05);
 }
-@media (max-width: 768px) {
-    .gender-section {
-        flex-direction: column;
-    }
-}
 
 .image-container:hover h2 {
     color: gray; /* Ändert die Schriftfarbe beim Hover */
@@ -243,47 +261,58 @@ body {
     text-decoration: none; /* Kein Textdeko beim Hover */
 }
 
+/* Responsives Design */
+@media (max-width: 768px) {
+    .gender-section {
+        flex-direction: column; /* Stapelt die Elemente */
+        gap: 15px; /* Reduziert den Abstand */
+    }
+
+    .gender {
+        flex: none; /* Hebt die Flex-Aufteilung auf */
+        width: 100%; /* Volle Breite für kleine Bildschirme */
+    }
+}
+
 /* Bestseller */
 .bestseller {
     width: 100%;
     padding: 20px;
     box-sizing: border-box;
     text-align: center;
+    background-color: #f9f9f9; /* Optional: leichtes Hintergrundfarben-Highlight */
 }
 
 .bestseller h2 {
     font-size: 2rem;
     margin-bottom: 20px;
+    color: #333; /* Deutliche Textfarbe */
 }
 
 .product-list {
     display: grid;
     gap: 20px;
-    grid-template-columns: repeat(3, 1fr); /* Drei Artikel im Vollbildformat */
-}
-
-@media (max-width: 768px) {
-    .product-list {
-        grid-template-columns: repeat(2, 1fr); /* Zwei Artikel im Handyformat */
-    }
+    grid-template-columns: repeat(3, 1fr); /* Drei Spalten im Vollbild */
+    padding: 0;
+    margin: 0;
+    list-style: none; /* Entfernt Standardlistenstil */
 }
 
 .product {
-    flex: 1 1 calc(33.33% - 20px); /* Drei Produkte nebeneinander im großen Format */
-    max-width: calc(33.33% - 20px);
     text-align: center;
-    padding: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #ffffff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    background-color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .product img {
-    width: 100%; /* Bild passt in die Box */
-    height: auto; /* Proportionales Skalieren */
-    object-fit: cover; /* Bild wird proportional angepasst */
-    margin-bottom: 10px;
+    width: 100%; /* Volle Breite des Containers */
+    height: auto; /* Proportionale Skalierung */
+    object-fit: cover; /* Füllt den Container aus */
     border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 .product:hover {
@@ -294,7 +323,8 @@ body {
 .product p {
     margin: 5px 0;
     font-size: 1rem;
-    line-height: 1.5; /* Verbessert die Lesbarkeit */
+    color: #555; /* Dezente Textfarbe */
+    line-height: 1.5;
 }
 
 /* Pagination-Styling */
@@ -302,11 +332,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
+    margin-top: 20px;
 }
 
-.pagination button,
-.pagination span {
+.pagination button {
     padding: 10px 15px;
     border: none;
     border-radius: 50%;
@@ -314,11 +344,10 @@ body {
     color: #333;
     font-size: 1rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.pagination button:hover,
-.pagination span:hover {
+.pagination button:hover {
     background-color: #333;
     color: white;
 }
@@ -338,9 +367,17 @@ body {
 
 /* Responsive Anpassungen */
 @media (max-width: 768px) {
+    .product-list {
+        grid-template-columns: repeat(2, 1fr); /* Zwei Spalten für Tablets */
+    }
     .product {
-        flex: 1 1 calc(50% - 20px); /* Zwei Artikel nebeneinander im Handyformat */
-        max-width: calc(50% - 20px);
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-list {
+        grid-template-columns: 1fr; /* Eine Spalte für Smartphones */
     }
 }
 
@@ -516,24 +553,4 @@ footer a:hover {
 
 .footer-right .social-links a:hover img {
     filter: grayscale(50%); /* Icon wird beim Hover leicht grau */
-}
-
-
-/* Warenkorb Float-Button */
-@media (max-width: 768px) {
-    .cart {
-        display: none;
-    }
-    .float-cart {
-        position: fixed;
-        bottom: 10%;
-        left: 5%;
-        background-color: black;
-        color: white;
-        padding: 10px;
-        border-radius: 50%;
-        z-index: 1000;
-        text-align: center;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
 }

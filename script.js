@@ -73,44 +73,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const burgerMenu = document.querySelector(".burger-menu");
     const dropdownMenu = document.querySelector(".dropdown-menu");
 
-    burgerMenu.addEventListener("click", (event) => {
-        event.stopPropagation();
-        dropdownMenu.classList.toggle("active");
-    });
+    if (burgerMenu && dropdownMenu) {
+        burgerMenu.addEventListener("click", () => {
+            dropdownMenu.classList.toggle("active");
+        });
+    } else {
+        console.error("Burger-Menü oder Dropdown-Menü nicht gefunden");
+    }
 
-    document.addEventListener("click", (event) => {
-        if (!burgerMenu.contains(event.target) && !dropdownMenu.contains(event.target)) {
-            dropdownMenu.classList.remove("active");
-        }
-    });
+  // Float-Warenkorb sichtbar machen
+  const floatCart = document.createElement("div");
+  floatCart.className = "cart-float";
+  floatCart.innerHTML = '<img src="in-den-warenkorb-legen.png" alt="Warenkorb">';
 
-    // Floating cart button for mobile
-    const cartLink = document.querySelector(".cart");
-    const floatButton = document.createElement("a");
-    let isFloatButtonVisible = false;
+  floatCart.addEventListener("click", () => {
+      window.location.href = "cart.html"; // Beispiel: Weiterleitung zur Warenkorb-Seite
+  });
 
-    floatButton.href = "cart.html";
-    floatButton.classList.add("cart-float");
-    floatButton.innerHTML = `<img src="in-den-warenkorb-legen.png" alt="Warenkorb">`;
+  document.body.appendChild(floatCart);
 
-    const handleResize = () => {
-        if (window.innerWidth <= 768) {
-            if (!isFloatButtonVisible) {
-                document.body.appendChild(floatButton);
-                isFloatButtonVisible = true;
-            }
-            if (cartLink) cartLink.style.display = "none";
-        } else {
-            if (isFloatButtonVisible) {
-                document.body.removeChild(floatButton);
-                isFloatButtonVisible = false;
-            }
-            if (cartLink) cartLink.style.display = "inline-block";
-        }
-    };
+  // Optional: Anzeigen des Float-Carts nur auf Mobilgeräten
+  const mediaQuery = window.matchMedia("(max-width: 768px)");
+  const toggleFloatCart = (e) => {
+      if (e.matches) {
+          floatCart.style.display = "block";
+      } else {
+          floatCart.style.display = "none";
+      }
+  };
 
-    window.addEventListener("resize", handleResize);
-    handleResize();
+  mediaQuery.addEventListener("change", toggleFloatCart);
+  toggleFloatCart(mediaQuery);
 });
 
 

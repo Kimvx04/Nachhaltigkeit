@@ -81,29 +81,38 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("Burger-Menü oder Dropdown-Menü nicht gefunden");
     }
 
-  // Float-Warenkorb sichtbar machen
-  const floatCart = document.createElement("div");
-  floatCart.className = "cart-float";
-  floatCart.innerHTML = '<img src="in-den-warenkorb-legen.png" alt="Warenkorb">';
+  // Warten, bis das DOM vollständig geladen ist
+document.addEventListener("DOMContentLoaded", () => {
+    // Den Float-Button in der DOM auswählen
+    const cartFloat = document.createElement("div");
+    cartFloat.className = "cart-float";
+    cartFloat.innerHTML = `
+        <img src="cart-icon.png" alt="Warenkorb">
+    `;
+    document.body.appendChild(cartFloat);
 
-  floatCart.addEventListener("click", () => {
-      window.location.href = "cart.html"; // Beispiel: Weiterleitung zur Warenkorb-Seite
-  });
+    // Eventlistener für den Klick auf den Floating-Button
+    cartFloat.addEventListener("click", () => {
+        alert("Warenkorb geöffnet!"); // Beispielaktion: Warenkorb öffnen
+        // Hier könnte stattdessen ein Modal geöffnet oder zur Warenkorbseite navigiert werden
+    });
 
-  document.body.appendChild(floatCart);
+    // Dynamisches Ein- und Ausblenden des Buttons beim Scrollen
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 200) {
+            cartFloat.style.transform = "scale(1)";
+            cartFloat.style.opacity = "1";
+        } else {
+            cartFloat.style.transform = "scale(0)";
+            cartFloat.style.opacity = "0";
+        }
+    });
 
-  // Optional: Anzeigen des Float-Carts nur auf Mobilgeräten
-  const mediaQuery = window.matchMedia("(max-width: 768px)");
-  const toggleFloatCart = (e) => {
-      if (e.matches) {
-          floatCart.style.display = "block";
-      } else {
-          floatCart.style.display = "none";
-      }
-  };
-
-  mediaQuery.addEventListener("change", toggleFloatCart);
-  toggleFloatCart(mediaQuery);
+    // Initialer Zustand des Buttons (falls nötig)
+    cartFloat.style.transform = "scale(0)";
+    cartFloat.style.opacity = "0";
+    cartFloat.style.transition = "transform 0.3s ease, opacity 0.3s ease";
 });
+
 
 

@@ -177,13 +177,6 @@ body {
     }
 }
 
-/* Verbesserte Lesbarkeit des Hero-Textes */
-.hero h1 {
-    font-size: clamp(2rem, 5vw, 4rem);
-    margin: 0;
-    line-height: 1.2;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-}
 
 /* Gender-Sektion */
 .gender-section {

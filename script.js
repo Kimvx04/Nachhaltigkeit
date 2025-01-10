@@ -1,47 +1,70 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const products = Array.from(document.querySelectorAll(".product"));
-    const paginationContainer = document.querySelector(".pagination");
-    const nextButton = document.querySelector(".next");
-    const prevButton = document.querySelector(".prev");
-
-    let itemsPerPage;
+document.addEventListener('DOMContentLoaded', () => {
+    const products = Array.from(document.querySelectorAll('.product'));
+    const itemsPerPageDesktop = 3; // Anzahl der Artikel pro Seite (Vollbild)
+    const itemsPerPageMobile = 2; // Anzahl der Artikel pro Seite (Handy)
     let currentPage = 1;
 
-    const updateLayout = () => {
-        const isMobile = window.innerWidth <= 768;
-        itemsPerPage = isMobile ? 4 : 6; // 4 Artikel pro Seite im Handyformat, 6 im großen Format
-        renderPage(currentPage);
+    // Responsive Prüfung
+    const updateItemsPerPage = () => {
+        return window.innerWidth <= 768 ? itemsPerPageMobile : itemsPerPageDesktop;
     };
 
-    const renderPage = (pageNumber) => {
+    const renderProducts = () => {
+        const itemsPerPage = updateItemsPerPage();
         const totalPages = Math.ceil(products.length / itemsPerPage);
-        currentPage = Math.max(1, Math.min(pageNumber, totalPages));
-
-        const start = (currentPage - 1) * itemsPerPage;
-        const end = start + itemsPerPage;
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
 
         products.forEach((product, index) => {
-            product.style.display = index >= start && index < end ? "block" : "none";
+            product.style.display = index >= startIndex && index < endIndex ? 'block' : 'none';
         });
 
-        updatePaginationState(totalPages);
+        // Buttons aktualisieren
+        document.querySelector('.prev').disabled = currentPage === 1;
+        document.querySelector('.next').disabled = currentPage === totalPages;
+
+        // Aktive Seite markieren
+        document.querySelectorAll('.page-number').forEach((btn, idx) => {
+            btn.classList.toggle('active', idx + 1 === currentPage);
+        });
     };
 
-    const updatePaginationState = (totalPages) => {
-        prevButton.disabled = currentPage === 1;
-        nextButton.disabled = currentPage === totalPages;
+    // Pagination-Buttons erstellen
+    const createPagination = () => {
+        const paginationContainer = document.querySelector('.pagination');
+        const itemsPerPage = updateItemsPerPage();
+        const totalPages = Math.ceil(products.length / itemsPerPage);
+
+        paginationContainer.innerHTML = `
+            <button class="prev">&lt;</button>
+            ${Array.from({ length: totalPages }, (_, i) => 
+                `<button class="page-number" data-page="${i + 1}">${i + 1}</button>`
+            ).join('')}
+            <button class="next">&gt;</button>
+        `;
+
+        // Event Listener
+        paginationContainer.addEventListener('click', (event) => {
+            if (event.target.matches('.prev')) {
+                currentPage = Math.max(currentPage - 1, 1);
+            } else if (event.target.matches('.next')) {
+                currentPage = Math.min(currentPage + 1, Math.ceil(products.length / updateItemsPerPage()));
+            } else if (event.target.matches('.page-number')) {
+                currentPage = parseInt(event.target.dataset.page);
+            }
+            renderProducts();
+        });
+
+        renderProducts();
     };
 
-    nextButton.addEventListener("click", () => {
-        renderPage(currentPage + 1);
-    });
+    // Initialisieren
+    createPagination();
 
-    prevButton.addEventListener("click", () => {
-        renderPage(currentPage - 1);
-    });
+    // Bei Fenstergröße ändern
+    window.addEventListener('resize', createPagination);
+});
 
-    window.addEventListener("resize", updateLayout);
-    updateLayout();
 
     // Burger menu for mobile
     const burgerMenu = document.querySelector(".burger-menu");

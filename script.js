@@ -1,15 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
     const products = Array.from(document.querySelectorAll(".product"));
     const paginationContainer = document.querySelector(".pagination");
-    const nextButton = document.querySelector(".pagination-next");
-    const prevButton = document.querySelector(".pagination-prev");
+    const nextButton = document.querySelector(".next");
+    const prevButton = document.querySelector(".prev");
 
     let itemsPerPage;
     let currentPage = 1;
 
     const updateLayout = () => {
         const isMobile = window.innerWidth <= 768;
-        itemsPerPage = isMobile ? 4 : 6;
+        itemsPerPage = isMobile ? 4 : 6; // 4 Artikel pro Seite im Handyformat, 6 im großen Format
         renderPage(currentPage);
     };
 
@@ -27,8 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
         updatePaginationState(totalPages);
     };
 
-     // Aktualisierung der Seitennavigation
-     const updatePaginationState = (totalPages) => {
+    const updatePaginationState = (totalPages) => {
         prevButton.disabled = currentPage === 1;
         nextButton.disabled = currentPage === totalPages;
     };
@@ -44,25 +43,29 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("resize", updateLayout);
     updateLayout();
 
-   // Burger-Menü Logik
-   burgerMenu.addEventListener("click", (event) => {
-    event.stopPropagation();
-    dropdownMenu.classList.toggle("active");
-});
+    // Burger menu for mobile
+    const burgerMenu = document.querySelector(".burger-menu");
+    const dropdownMenu = document.querySelector(".dropdown-menu");
 
-document.addEventListener("click", (event) => {
-    if (!burgerMenu.contains(event.target) && !dropdownMenu.contains(event.target)) {
-        dropdownMenu.classList.remove("active");
-    }
-});
+    burgerMenu.addEventListener("click", (event) => {
+        event.stopPropagation();
+        dropdownMenu.classList.toggle("active");
+    });
 
-    // Warenkorb Float-Button für Mobilgeräte
+    document.addEventListener("click", (event) => {
+        if (!burgerMenu.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.classList.remove("active");
+        }
+    });
+
+    // Floating cart button for mobile
     const cartLink = document.querySelector(".cart");
     const floatButton = document.createElement("a");
+    let isFloatButtonVisible = false;
+
     floatButton.href = "cart.html";
     floatButton.classList.add("cart-float");
     floatButton.innerHTML = `<img src="in-den-warenkorb-legen.png" alt="Warenkorb">`;
-    let isFloatButtonVisible = false;
 
     const handleResize = () => {
         if (window.innerWidth <= 768) {
@@ -82,8 +85,6 @@ document.addEventListener("click", (event) => {
 
     window.addEventListener("resize", handleResize);
     handleResize();
-
-    // Zeige die erste Seite
-    showPage(1);
 });
+
 

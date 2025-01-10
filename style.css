@@ -6,21 +6,22 @@ body {
 }
 
 .hero {
-    background-image: url('Meer.jpeg');
+    background: url('Meer.jpeg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    height: 4vh; /* Höhe des Abschnitts, optional */
-    color: white; /* Textfarbe, um auf hellem Hintergrund lesbar zu sein */
+    height: 100vh;
+    color: white;
     display: flex;
-    justify-content: center; /* Zentriert den Text horizontal */
-    align-items: center; /* Zentriert den Text vertikal */
-    text-align: center; /* Zentriert den Text im Block */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
+
 .hero h1 {
-    font-size: clamp(1.5rem, 5vw, 4rem); /* Dynamische Schriftgröße */
-    margin: 0; /* Entfernt Standardabstand */
-    line-height: 1.2; /* Optimiert den Abstand zwischen den Zeilen */
+    font-size: clamp(1.5rem, 5vw, 4rem);
+    margin: 0;
+    line-height: 1.2;
 }
 
 .brand-name {

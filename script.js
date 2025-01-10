@@ -1,62 +1,48 @@
 document.addEventListener("DOMContentLoaded", () => {
     const products = Array.from(document.querySelectorAll(".product"));
     const paginationContainer = document.querySelector(".pagination");
-    const burgerMenu = document.querySelector(".burger-menu");
-    const dropdownMenu = document.querySelector(".dropdown-menu");
-    let itemsPerPage = window.innerWidth <= 768 ? 4 : 3;
+    const nextButton = document.querySelector(".pagination-next");
+    const prevButton = document.querySelector(".pagination-prev");
+
+    let itemsPerPage;
     let currentPage = 1;
 
-    // Funktion zum Anzeigen der Artikel
-    const showPage = (pageNumber) => {
-        const start = (pageNumber - 1) * itemsPerPage;
+    const updateLayout = () => {
+        const isMobile = window.innerWidth <= 768;
+        itemsPerPage = isMobile ? 4 : 6;
+        renderPage(currentPage);
+    };
+
+    const renderPage = (pageNumber) => {
+        const totalPages = Math.ceil(products.length / itemsPerPage);
+        currentPage = Math.max(1, Math.min(pageNumber, totalPages));
+
+        const start = (currentPage - 1) * itemsPerPage;
         const end = start + itemsPerPage;
 
         products.forEach((product, index) => {
             product.style.display = index >= start && index < end ? "block" : "none";
         });
 
-        currentPage = pageNumber;
-        updatePagination();
+        updatePaginationState(totalPages);
     };
 
      // Aktualisierung der Seitennavigation
-     const updatePagination = () => {
-        const totalPages = Math.ceil(products.length / itemsPerPage);
-
-        paginationContainer.innerHTML = `
-            <span class="prev-page">&#8592;</span>
-            ${Array.from({ length: totalPages }, (_, i) =>
-                `<span class="page-number ${i + 1 === currentPage ? "active" : ""}" data-page="${i + 1}">${i + 1}</span>`
-            ).join("")}
-            <span class="next-page">&#8594;</span>
-        `;
+     const updatePaginationState = (totalPages) => {
+        prevButton.disabled = currentPage === 1;
+        nextButton.disabled = currentPage === totalPages;
     };
-    // Event-Listener für Navigation per Klick
-    paginationContainer.addEventListener("click", (e) => {
-        if (e.target.classList.contains("page-number")) {
-            const pageNumber = parseInt(e.target.dataset.page, 10);
-            showPage(pageNumber);
-        } else if (e.target.classList.contains("prev-page") && currentPage > 1) {
-            showPage(currentPage - 1);
-        } else if (e.target.classList.contains("next-page") && currentPage < Math.ceil(products.length / itemsPerPage)) {
-            showPage(currentPage + 1);
-        }
+
+    nextButton.addEventListener("click", () => {
+        renderPage(currentPage + 1);
     });
 
-    // Event-Listener für Pfeiltasten
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "ArrowLeft" && currentPage > 1) {
-            showPage(currentPage - 1);
-        } else if (e.key === "ArrowRight" && currentPage < Math.ceil(products.length / itemsPerPage)) {
-            showPage(currentPage + 1);
-        }
+    prevButton.addEventListener("click", () => {
+        renderPage(currentPage - 1);
     });
 
-    // Responsive Einstellungen
-    window.addEventListener("resize", () => {
-        itemsPerPage = window.innerWidth <= 768 ? 4 : 3;
-        showPage(currentPage);
-    });
+    window.addEventListener("resize", updateLayout);
+    updateLayout();
 
    // Burger-Menü Logik
    burgerMenu.addEventListener("click", (event) => {

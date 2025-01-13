@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
     floatButton.innerHTML = `
        <img src="Warenkorb.png" alt="Warenkorb">
     `;
-    document.body.appendChild(cartFloat);
+    document.body.appendChild(floatButton);
 
     // Eventlistener für den Klick auf den Floating-Button
     floatButton.addEventListener("click", () => {

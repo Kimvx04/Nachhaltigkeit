@@ -144,38 +144,44 @@ body {
     border-radius: 50%;
     padding: 10px;
     cursor: pointer;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
     opacity: 0; /* Startzustand unsichtbar */
     transform: scale(0); /* Startzustand verkleinert */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .float-button img {
     width: 40px; /* Anpassbare Größe des Icons */
     height: 40px;
+    object-fit: contain; /* Verhindert, dass das Bild verzerrt wird */
 }
 
+/* Hover-Effekt */
 .float-button:hover {
     background-color: rgba(0, 0, 0, 0.8); /* Etwas dunkler beim Hover */
+    transform: scale(1.1); /* Etwas größere Schaltfläche beim Hover */
 }
 
 /* Button sichtbar machen */
 .float-button.show {
     opacity: 1;
-    visibility: visible;
-    transform: scale(1.1);
+    transform: scale(1); /* Setzt den Button auf seine Standardgröße */
 }
 
-@media (max-width: 768px){
-    .float-button{
-        width: 15vmin;
-        height: 15vmin;
+/* Mobile Anpassungen */
+@media (max-width: 768px) {
+    .float-button {
+        width: 12vmin;
+        height: 12vmin;
     }
 }
 
-@media (max-width: 480px){
-    .float-button{
-        width: 20vmin;
-        height: 20vmin;
+@media (max-width: 480px) {
+    .float-button {
+        width: 15vmin;
+        height: 15vmin;
     }
 }
 

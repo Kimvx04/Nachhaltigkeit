@@ -81,13 +81,13 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("Burger-Menü oder Dropdown-Menü nicht gefunden");
     }
 
-  // Warten, bis das DOM vollständig geladen ist
+// Warten, bis das DOM vollständig geladen ist
 document.addEventListener("DOMContentLoaded", () => {
     // Den Float-Button in der DOM auswählen
     const cartFloat = document.createElement("div");
     cartFloat.className = "cart-float";
     cartFloat.innerHTML = `
-        <img src="cart-icon.png" alt="Warenkorb">
+        <img src="cart-icon.png" alt="">
     `;
     document.body.appendChild(cartFloat);
 

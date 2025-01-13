@@ -135,46 +135,34 @@ body {
 }
 
 
-/* Warenkorb-Icon bleibt immer sichtbar */
-.cart {
-    display: inline-block; /* Immer sichtbar */
-    position: relative;
-    z-index: 10;
-}
-
-/* Float-Warenkorb für kleinere Bildschirme */
-.cart-float {
+/* Standard-Button-Einstellungen */
+.float-button {
     position: fixed;
-    bottom: 20px; /* Abstand vom unteren Bildschirmrand */
-    right: 20px; /* Abstand vom rechten Bildschirmrand */
-    background-color: transparent; /* Kein Hintergrund */
-    border-radius: 50%; /* Rundes Icon */
-    width: 60px; /* Breite des Buttons */
-    height: 60px; /* Höhe des Buttons */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Optional: Schatten */
-    z-index: 2000;
-    display: flex;
-    justify-content: center; /* Icon zentrieren */
-    align-items: center; /* Icon zentrieren */
-    cursor: pointer; /* Zeigeränderung beim Hover */
-    transition: transform 0.3s ease, background-color 0.3s ease; /* Animationseffekte */
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.5); /* Transparenter Hintergrund */
+    opacity: 0; /* Unsichtbar am Anfang */
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.cart-float img {
-    width: 40px; /* Größe des Icons */
-    height: 40px;
+.float-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Stellt sicher, dass das Bild richtig skaliert wird */
+    display: block;
 }
 
-.cart-float:hover {
-    transform: scale(1.1); /* Vergrößerung beim Hover */
-    background-color: rgba(240, 240, 240, 0.8); /* Optionaler Hintergrund beim Hover */
-}
-
-@media (max-width: 768px) {
-    .cart-float {
-        bottom: 15px; /* Etwas höher auf kleinen Bildschirmen */
-        right: 15px;
-    }
+/* Button sichtbar machen */
+.float-button.show {
+    opacity: 1;
+    visibility: visible;
 }
 
 

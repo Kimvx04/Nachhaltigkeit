@@ -140,7 +140,7 @@ body {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: transparent;
     border-radius: 50%;
     padding: 10px;
     cursor: pointer;
@@ -160,7 +160,7 @@ body {
 
 /* Hover-Effekt */
 .float-button:hover {
-    background-color: rgba(0, 0, 0, 0.8); /* Etwas dunkler beim Hover */
+    background-color: rgba(196, 196, 196, 0.8); /* Etwas dunkler beim Hover */
     transform: scale(1.1); /* Etwas größere Schaltfläche beim Hover */
 }
 

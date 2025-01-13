@@ -84,15 +84,15 @@ document.addEventListener('DOMContentLoaded', () => {
 // Warten, bis das DOM vollständig geladen ist
 document.addEventListener("DOMContentLoaded", () => {
     // Den Float-Button in der DOM auswählen
-    const cartFloat = document.createElement("div");
-    cartFloat.className = "cart-float";
-    cartFloat.innerHTML = `
+    const floatButton = document.createElement("div");
+    floatButton.className = "float-button";
+    floatButton.innerHTML = `
        <img src="Warenkorb.png" alt="Warenkorb">
     `;
     document.body.appendChild(cartFloat);
 
     // Eventlistener für den Klick auf den Floating-Button
-    cartFloat.addEventListener("click", () => {
+    floatButton.addEventListener("click", () => {
         alert("Warenkorb geöffnet!"); // Beispielaktion: Warenkorb öffnen
         // Hier könnte stattdessen ein Modal geöffnet oder zur Warenkorbseite navigiert werden
     });
@@ -100,18 +100,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // Dynamisches Ein- und Ausblenden des Buttons beim Scrollen
     window.addEventListener("scroll", () => {
         if (window.scrollY > 200) {
-            cartFloat.style.transform = "scale(1)";
-            cartFloat.style.opacity = "1";
+            floatButton.style.transform = "scale(1)";
+            floatButton.style.opacity = "1";
         } else {
-            cartFloat.style.transform = "scale(0)";
-            cartFloat.style.opacity = "0";
+            floatButton.style.transform = "scale(0)";
+            floatButton.style.opacity = "0";
         }
     });
 
     // Initialer Zustand des Buttons (falls nötig)
-    cartFloat.style.transform = "scale(0)";
-    cartFloat.style.opacity = "0";
-    cartFloat.style.transition = "transform 0.3s ease, opacity 0.3s ease";
+    floatButton.style.transform = "scale(0)";
+    floatButton.style.opacity = "0";
+    floatButton.style.transition = "transform 0.3s ease, opacity 0.3s ease";
 });
 
 

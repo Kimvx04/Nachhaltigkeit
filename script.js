@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const cartFloat = document.createElement("div");
     cartFloat.className = "cart-float";
     cartFloat.innerHTML = `
-         <img src="images/in-den-warenkorb-legen.png" alt="Warenkorb">
+       <img src="/images/in-den-warenkorb-legen.png" alt="Warenkorb">
     `;
     document.body.appendChild(cartFloat);
 
